@@ -1,4 +1,5 @@
 import Navbar from '../components/Navbar'
+import JobCard from '../components/JobCard'
 
 function Dashboard() {
   return (
@@ -33,7 +34,9 @@ function Dashboard() {
 
         <div className="bg-white mt-8 p-6 rounded-xl shadow">
           <h2 className="text-2xl font-bold mb-4">Recent Applications</h2>
-          <p className="text-gray-500">No applications added yet.</p>
+          <div className="mt-4">
+  <JobCard />
+</div>
         </div>
       </div>
     </div>
