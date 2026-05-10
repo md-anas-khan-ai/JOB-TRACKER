@@ -1,5 +1,6 @@
 import Navbar from '../components/Navbar'
 import JobCard from '../components/JobCard'
+import ResumeUpload from '../components/ResumeUpload'
 
 function Dashboard() {
   return (
@@ -7,7 +8,9 @@ function Dashboard() {
       <Navbar />
 
       <div className="p-8">
-        <h1 className="text-4xl font-bold text-blue-600">Dashboard</h1>
+        <h1 className="text-4xl font-bold text-blue-600">
+          Dashboard
+        </h1>
 
         <p className="text-gray-600 mt-2">
           Overview of your job applications
@@ -34,6 +37,8 @@ function Dashboard() {
             <p className="text-3xl font-bold mt-2">0</p>
           </div>
         </div>
+
+        <ResumeUpload />
 
         <div className="bg-white mt-8 p-6 rounded-xl shadow">
           <h2 className="text-2xl font-bold mb-4">
