@@ -1,24 +1,14 @@
 const express = require('express')
-const Job = require('../models/Job')
+
+const {
+  createJob,
+  getJobs,
+} = require('../controllers/jobController')
 
 const router = express.Router()
 
-router.post('/', async (req, res) => {
-  try {
-    const job = await Job.create(req.body)
-    res.status(201).json(job)
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-})
+router.post('/', createJob)
 
-router.get('/', async (req, res) => {
-  try {
-    const jobs = await Job.find().sort({ createdAt: -1 })
-    res.status(200).json(jobs)
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-})
+router.get('/', getJobs)
 
 module.exports = router
