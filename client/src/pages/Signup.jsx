@@ -1,41 +1,73 @@
-import Navbar from '../components/Navbar'
+import { useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+
+const API_URL = 'https://job-tracker-5yjb.onrender.com'
 
 function Signup() {
+  const navigate = useNavigate()
+
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleSignup = async (e) => {
+    e.preventDefault()
+
+    try {
+      const response = await axios.post(`${API_URL}/api/auth/signup`, {
+        name,
+        email,
+        password,
+      })
+
+      localStorage.setItem('user', JSON.stringify(response.data))
+      alert('Signup successful')
+      navigate('/dashboard')
+    } catch (error) {
+      alert(error.response?.data?.message || 'Signup failed')
+    }
+  }
+
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Navbar />
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <form
+        onSubmit={handleSignup}
+        className="bg-white p-8 rounded-xl shadow w-full max-w-md"
+      >
+        <h1 className="text-3xl font-bold mb-6 text-blue-600">Signup</h1>
 
-      <div className="flex justify-center items-center mt-20">
-        <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
-          <h2 className="text-3xl font-bold text-center text-blue-600">
-            Create Account
-          </h2>
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full border p-3 rounded-lg mb-4"
+          required
+        />
 
-          <form className="mt-6 flex flex-col gap-4">
-            <input
-              type="text"
-              placeholder="Enter your name"
-              className="border p-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-400"
-            />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full border p-3 rounded-lg mb-4"
+          required
+        />
 
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="border p-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-400"
-            />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full border p-3 rounded-lg mb-4"
+          required
+        />
 
-            <input
-              type="password"
-              placeholder="Create password"
-              className="border p-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-400"
-            />
-
-            <button className="bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">
-              Signup
-            </button>
-          </form>
-        </div>
-      </div>
+        <button className="w-full bg-blue-600 text-white py-3 rounded-lg">
+          Create Account
+        </button>
+      </form>
     </div>
   )
 }
