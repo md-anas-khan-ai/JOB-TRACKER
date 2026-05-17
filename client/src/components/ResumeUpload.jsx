@@ -37,6 +37,23 @@ function ResumeUpload() {
     }
   }
 
+  const saveJob = async (job) => {
+    try {
+      await axios.post('http://localhost:5000/api/jobs', {
+        company: job.company_name,
+        role: job.title,
+        location: job.candidate_required_location,
+        salary: job.salary,
+        url: job.url,
+      })
+
+      alert('Job saved successfully')
+    } catch (error) {
+      console.log(error)
+      alert('Failed to save job')
+    }
+  }
+
   return (
     <div className="bg-white p-6 rounded-xl shadow mt-8">
       <h2 className="text-2xl font-bold mb-2">AI Job Finder</h2>
@@ -91,14 +108,23 @@ function ResumeUpload() {
               ))}
             </div>
 
-            <a
-              href={job.url}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-block mt-5 bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700"
-            >
-              Apply Now
-            </a>
+            <div className="flex gap-3 mt-5">
+              <a
+                href={job.url}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700"
+              >
+                Apply Now
+              </a>
+
+              <button
+                onClick={() => saveJob(job)}
+                className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700"
+              >
+                Save Job
+              </button>
+            </div>
           </div>
         ))}
       </div>

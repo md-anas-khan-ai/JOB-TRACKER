@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar'
 import JobCard from '../components/JobCard'
 import ResumeUpload from '../components/ResumeUpload'
+import SavedJobs from '../components/SavedJobs'
 
 function Dashboard() {
   return (
@@ -39,6 +40,8 @@ function Dashboard() {
         </div>
 
         <ResumeUpload />
+
+        <SavedJobs />
 
         <div className="bg-white mt-8 p-6 rounded-xl shadow">
           <h2 className="text-2xl font-bold mb-4">
