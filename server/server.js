@@ -1,4 +1,5 @@
 require('dotenv').config()
+const authRoutes = require('./routes/authRoutes')
 
 const express = require('express')
 const cors = require('cors')
@@ -13,7 +14,7 @@ connectDB()
 
 app.use(cors())
 app.use(express.json())
-
+app.use('/api/auth', authRoutes)
 app.use('/api/jobs', jobRoutes)
 app.use('/api/resume', resumeRoutes)
 app.use('/api/search-jobs', jobSearchRoutes)
