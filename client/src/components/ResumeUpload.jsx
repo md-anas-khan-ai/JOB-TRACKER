@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import axios from 'axios'
 
+const API_URL = 'https://job-tracker-5yjb.onrender.com'
+
 function ResumeUpload() {
   const [file, setFile] = useState(null)
   const [jobs, setJobs] = useState([])
@@ -19,7 +21,7 @@ function ResumeUpload() {
       setLoading(true)
 
       const response = await axios.post(
-        'http://localhost:5000/api/resume/upload',
+        `${API_URL}/api/resume/upload`,
         formData,
         {
           headers: {
@@ -39,7 +41,7 @@ function ResumeUpload() {
 
   const saveJob = async (job) => {
     try {
-      await axios.post('http://localhost:5000/api/jobs', {
+      await axios.post(`${API_URL}/api/jobs`, {
         company: job.company_name,
         role: job.title,
         location: job.candidate_required_location,

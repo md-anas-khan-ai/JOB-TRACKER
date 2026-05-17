@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
+const API_URL = 'https://job-tracker-5yjb.onrender.com'
+
 function SavedJobs() {
   const [savedJobs, setSavedJobs] = useState([])
 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/jobs')
+        const response = await axios.get(`${API_URL}/api/jobs`)
         setSavedJobs(response.data)
       } catch (error) {
         console.log(error)
@@ -25,8 +27,11 @@ function SavedJobs() {
         {savedJobs.map((job) => (
           <div key={job._id} className="border p-4 rounded-lg">
             <h3 className="text-xl font-bold">{job.role}</h3>
+
             <p className="text-gray-600">{job.company}</p>
+
             <p className="text-gray-500">{job.location}</p>
+
             <p className="text-sm text-blue-600">{job.status}</p>
 
             <a
